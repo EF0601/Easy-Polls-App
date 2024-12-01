@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Easy Polls</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div id="screen">
+      <div id="about">
+        <h1>Easy polls</h1>
+        <p>An <i>eas</i>ier way to poll.</p>
+      </div>
+      <div id="tabBtns">
+        <button id="accessTabBtn" class="tabBtn">
+          <span>Find Poll</span>
+        </button>
+        <button id="makeTabBtn" class="tabBtn">
+          <span>Make Poll</span>
+        </button>
+      </div>
+      <div id="tabs">
+        <div id="accessTab" class="tab">
+          <!-- <p id="findPollProgressBar">
+            <span id="findPollProgressBarInnerPart"
+              >Step <span id="findPollStep">1</span> out of 3.</span
+            > -->
+          </p>
+          <h2>Find Poll</h2>
+          <input
+            type="text"
+            id="accessCode"
+            placeholder="ABC123"
+            required
+            maxlength="6" /><br />
+          <button type="submit" id="findPollBtn">Access Poll</button>
+        </div>
+        <div id="makeTab" class="tab">
+          <h2>Make Poll</h2>
+          <input
+            type="text"
+            id="question"
+            placeholder="Enter question"
+            required />
+          <br />
+          <input type="text" id="options" placeholder="Option 1" required />
+          <br />
+          <input type="text" id="options" placeholder="Option 2" required />
+          <br />
+          <input type="text" id="options" placeholder="Option 3" required />
+          <br />
+          <input type="text" id="options" placeholder="Option 4" required />
+          <br />
+          <button type="submit">Make Poll</button>
+        </div>
+      </div>
+      <footer>
+        <p>
+          Licensed under the MIT License. (C) 2024 EF-0601. Please read our
+          usage policy and privacy policy.
+        </p>
+      </footer>
+    </div>
+  </body>
+  <script src="./script.js"></script>
+</html>

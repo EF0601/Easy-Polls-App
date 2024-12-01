@@ -1,0 +1,102 @@
+*{
+     padding: 0;
+     margin: 0;
+     box-sizing: border-box;
+}
+
+@font-face {
+     font-family: 'Poppins';
+     src: url(./Poppins-Light.ttf);
+}
+
+body{
+     background-color: rgb(80, 45, 45);
+}
+
+#screen{
+     background-color: white;
+     /* border-radius: 25px; */
+     height: 600px;
+     width: 380px;
+     margin: auto;
+     margin-top: 50px;
+     font-family: 'Poppins';
+     overflow-y: scroll;
+     padding: 10px;
+}
+
+#about{
+     text-align: center;
+     padding-top: 20px;
+     font-size: 20px;
+}
+
+#tabBtns{
+     display: flex;
+     justify-content: space-around;
+}
+.tabBtn{
+     width: 50%;
+     font-family: 'Poppins';
+     border: none;
+     background-color: black;
+     color: white;
+     margin-left: 10px;
+}
+.tabBtn:hover{
+     background-color: white;
+     color: black;
+}
+
+#tabs{
+     height: 400px;
+}
+#makeTab{
+     display: none;
+}
+.tab{
+     text-align: center;
+     padding: 15px;
+}
+#accessCode{
+     border: 1px solid black;
+     width: 50%;
+     margin: auto;
+     padding: 5px;
+     font-family: 'Poppins';
+     letter-spacing: 10px;
+     text-transform: uppercase;
+     text-align: center;
+}
+/* #findPollBtn{
+     margin-top: 10px;
+     background-color: black;
+     color: white;
+     border: none;
+     padding: 5px;
+     font-family: 'Poppins';
+} */
+
+/* #findPollProgressBar{
+     width: 100%;
+     padding: 10px;
+     text-align: center;
+} */
+
+#makeTab input,
+#makeTab button,
+#accessTab input,
+#accessTab button{
+     width: 80%;
+     margin: auto;
+     padding: 5px;
+     font-family: 'Poppins';
+     margin-top: 10px;
+}
+
+footer{
+     text-align: center;
+     padding-top: 20px;
+     font-size: 10px;
+}
+
