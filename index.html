@@ -27,14 +27,35 @@
               >Step <span id="findPollStep">1</span> out of 3.</span
             > -->
           </p>
-          <h2>Find Poll</h2>
-          <input
-            type="text"
-            id="accessCode"
-            placeholder="ABC123"
-            required
-            maxlength="6" /><br />
-          <button type="submit" id="findPollBtn">Access Poll</button>
+          <div id="findTab">
+            <h2>Find Poll</h2>
+            <input
+              type="text"
+              id="accessCode"
+              placeholder="ABC123"
+              required
+              maxlength="6" /><br />
+            <button type="submit" id="findPollBtn">Access Poll</button>
+            <div id="accessCodeError"></div>
+          </div><br>
+          <div id="voteTab">
+            <hr>
+            <h2>Vote On Poll <span id="pollIdDisplay">123ABC</span></h2>
+            <p id="pollTitle"></p>
+            <button id="option1" onclick="vote(1)"></button>
+            <button id="option2" onclick="vote(2)"></button>
+            <button id="option3" onclick="vote(3)"></button>
+            <button id="option4" onclick="vote(4)"></button>
+          </div><br>
+          <div id="resultsTab">
+            <hr>
+            <h2>Results For Poll <span id="pollIdDisplay">123ABC</span></h2>
+            <div id="results">
+              <div id="option1Results"></div>
+              <div id="option2Results"></div>
+              <div id="option3Results"></div>
+              <div id="option4Results"></div>
+            </div>
         </div>
         <div id="makeTab" class="tab">
           <h2>Make Poll</h2>
