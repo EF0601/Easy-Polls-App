@@ -40,7 +40,7 @@
           </div><br>
           <div id="voteTab">
             <hr>
-            <h2>Vote On Poll <span id="pollIdDisplay">123ABC</span></h2>
+            <h2>Vote On Poll <span class="pollIdDisplay">123ABC</span></h2>
             <p id="pollTitle"></p>
             <button id="option1" onclick="vote(1)"></button>
             <button id="option2" onclick="vote(2)"></button>
@@ -49,13 +49,14 @@
           </div><br>
           <div id="resultsTab">
             <hr>
-            <h2>Results For Poll <span id="pollIdDisplay">123ABC</span></h2>
+            <h2>Results For Poll <span class="pollIdDisplay">123ABC</span></h2><br>
             <div id="results">
               <div id="option1Results"></div>
               <div id="option2Results"></div>
               <div id="option3Results"></div>
               <div id="option4Results"></div>
             </div>
+          </div>
         </div>
         <div id="makeTab" class="tab">
           <h2>Make Poll</h2>
@@ -65,23 +66,29 @@
             placeholder="Enter question"
             required />
           <br />
-          <input type="text" id="options" placeholder="Option 1" required />
+          <input type="text" id="option1Input" placeholder="Option 1" required />
           <br />
-          <input type="text" id="options" placeholder="Option 2" required />
+          <input type="text" id="option2Input" placeholder="Option 2" required />
           <br />
-          <input type="text" id="options" placeholder="Option 3" required />
+          <input type="text" id="option3Input" placeholder="Option 3" required />
           <br />
-          <input type="text" id="options" placeholder="Option 4" required />
+          <input type="text" id="option4Input" placeholder="Option 4" required />
           <br />
-          <button type="submit">Make Poll</button>
+          <button onclick="makePoll()">Make Poll</button><br>
+          <div id="shareTab">
+            <hr>
+            <h2>Share Poll</h2>
+            <p>Share this this poll to whoever you wish to share it with. Tell them to use the ID:</p>
+            <p id="pollId">ABC123</p>
+          </div>
         </div>
       </div>
-      <footer>
+      <!-- <footer>
         <p>
           Licensed under the MIT License. (C) 2024 EF-0601. Please read our
           usage policy and privacy policy.
         </p>
-      </footer>
+      </footer> -->
     </div>
   </body>
   <script src="./script.js"></script>

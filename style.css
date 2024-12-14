@@ -53,7 +53,7 @@ body{
 }
 #makeTab,
 #voteTab,
-#resultTab{
+#resultsTab{
      display: none;
 }
 .tab{
@@ -102,3 +102,19 @@ footer{
      font-size: 10px;
 }
 
+#option1Results,
+#option2Results,
+#option3Results,
+#option4Results{
+     /* display: none; */
+     background-color: rgb(239, 239, 239);
+     margin: 10px;
+     font-size: auto;
+}
+
+#pollId{
+     font-family: 'Poppins';
+     text-align: center;
+     padding: 10px;
+     font-size: 30px;
+}
