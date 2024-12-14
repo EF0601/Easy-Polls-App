@@ -30,7 +30,7 @@ let pollData = {
 document.getElementById('findPollBtn').addEventListener('click', () => {
      const pollId = document.getElementById('accessCode').value.toUpperCase();
      if (pollId) {
-          fetch(`https://getdocument-ldhb2q24ra-uc.a.run.app?id=${pollId}&auth=axa-fang`)
+          fetch(`https://getdocument-ldhb2q24ra-uc.a.run.app?id=${pollId}`)
                .then(response => {
                     if (!response.ok) {
                          throw new Error(response.status);
@@ -98,7 +98,7 @@ function vote(num){
                pollData.option4[1]++;
                break;
      }
-     fetch(`https://updatedocument-ldhb2q24ra-uc.a.run.app?id=poll_${pollData.id}&auth=axa-fang`, {
+     fetch(`https://updatedocument-ldhb2q24ra-uc.a.run.app?id=poll_${pollData.id}`, {
           method: 'POST',
           headers: {
                'Content-Type': 'application/json'
