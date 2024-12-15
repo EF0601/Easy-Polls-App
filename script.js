@@ -181,7 +181,7 @@ function makePoll(){
                console.error(err);
                document.getElementById('makePollError').textContent = err;
           });
-          document.getElementById('shareLink').value = `Vote for my poll on https://www.ef0601.github.io/Easy-Polls-App, with ID ${pollData.id}`;
+          document.getElementById('shareLink').value = `Vote for my poll on https://ef0601.github.io/Easy-Polls-App, with ID ${pollData.id}`;
           document.getElementById('shareTab').style.display = 'block';
      }
 }
