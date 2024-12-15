@@ -56,6 +56,7 @@
               <div id="option3Results"></div>
               <div id="option4Results"></div>
             </div>
+            <button onclick="resetVoting()">Vote on another</button>
           </div>
         </div>
         <div id="makeTab" class="tab">
@@ -74,13 +75,16 @@
           <br />
           <input type="text" id="option4Input" placeholder="Option 4" required />
           <br />
-          <button onclick="makePoll()">Make Poll</button><br>
+          <button onclick="makePoll()">Make Poll</button><br><br>
+          <div id="makePollError"></div>
           <div id="shareTab">
             <hr>
             <h2>Share Poll</h2>
-            <p>Share this this poll to whoever you wish to share it with. Tell them to use the ID:</p>
-            <p id="pollId">ABC123</p>
+            <p>Share this this poll to whoever you wish to share it with. Use this message:</p>
+            <input type="text" id="shareLink" readonly>
+            <button onclick="resetMake()">Make another</button>
           </div>
+          
         </div>
       </div>
       <!-- <footer>

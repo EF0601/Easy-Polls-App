@@ -53,7 +53,8 @@ body{
 }
 #makeTab,
 #voteTab,
-#resultsTab{
+#resultsTab,
+#shareTab{
      display: none;
 }
 .tab{

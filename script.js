@@ -65,6 +65,7 @@ document.getElementById('findPollBtn').addEventListener('click', () => {
                          Array.from(document.getElementsByClassName('pollIdDisplay')).forEach(element => {
                               element.textContent = pollData.id;
                          });
+                         document.getElementById('accessCodeError').textContent = '';
                     } else {
                          accessCodeError.textContent = 'Poll not found';
                     }
@@ -149,26 +150,84 @@ function generateID(){
 }
 
 function makePoll(){
-     pollData.id = generateID();
-     pollData.title = document.getElementById('question').value;
-     pollData.option1[0] = document.getElementById('option1Input').value;
-     pollData.option2[0] = document.getElementById('option2Input').value;
-     pollData.option3[0] = document.getElementById('option3Input').value;
-     pollData.option4[0] = document.getElementById('option4Input').value;
+     if(document.getElementById('option1Input').value != "" && document.getElementById('option2Input').value != "" && document.getElementById('question').value != ""){
+          const pollData = {
+               title: document.getElementById('question').value,
+               id: generateID(),
+               option1: [document.getElementById('option1Input').value, 0],
+               option2: [document.getElementById('option2Input').value, 0],
+               option3: [document.getElementById('option3Input').value, 0],
+               option4: [document.getElementById('option4Input').value, 0]
+          }
+          if(document.getElementById('option3Input').value){
+               pollData.option3[0] = document.getElementById('option3Input').value;
+          }
+          if(document.getElementById('option4Input').value){
+               pollData.option4[0] = document.getElementById('option4Input').value;
+          }
+          fetch(`https://adddocument-ldhb2q24ra-uc.a.run.app?id=poll_${pollData.id}`, {
+               method: 'POST',
+               headers: {
+                    'Content-Type': 'application/json'
+               },
+               body: JSON.stringify(pollData)
+          })
+          .then(response => {
+               if (!response.ok) {
+                    throw new Error(response.status);
+               }
+          })
+          .catch(err => {
+               console.error(err);
+               document.getElementById('makePollError').textContent = err;
+          });
+          document.getElementById('shareLink').value = `Vote for my poll on https://www.ef0601.github.io/Easy-Polls-App, with ID ${pollData.id}`;
+          document.getElementById('shareTab').style.display = 'block';
+     }
+}
 
-     document.getElementById('option1Input').disabled = true;
-     document.getElementById('option2Input').disabled = true;
-     document.getElementById('option3Input').disabled = true;
-     document.getElementById('option4Input').disabled = true;
+const shareLink = document.getElementById('shareLink');
+shareLink.addEventListener('click', () => {
+     const oldText = shareLink.value;
+     navigator.clipboard.writeText(shareLink.value);
+     shareLink.value = 'Copied to clipboard!';
+     setTimeout(() => {
+          shareLink.value = oldText;
+     }, 2000);
+});
 
-     fetch(`https://adddocument-ldhb2q24ra-uc.a.run.app?id=poll_${pollData.id}`, {
-          method: 'POST',
-          headers: {
-               'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(pollData)
-     })
+function resetVoting(){
+     document.getElementById('voteTab').style.display = 'none';
+     document.getElementById('accessCode').disabled = false;
+     document.getElementById('accessCode').value = '';
+     document.getElementById('accessCodeError').textContent = '';
+     document.getElementById('option1').disabled = false;
+     document.getElementById('option2').disabled = false;
+     document.getElementById('option3').disabled = false;
+     document.getElementById('option4').disabled = false;
+     document.getElementById('resultsTab').style.display = 'none';
+     document.getElementById('option1Results').style.width = '0%';
+     document.getElementById('option2Results').style.width = '0%';
+     document.getElementById('option3Results').style.width = '0%';
+     document.getElementById('option4Results').style.width = '0%';
+     document.getElementById('option1Results').textContent = '';
+     document.getElementById('option2Results').textContent = '';
+     document.getElementById('option3Results').textContent = '';
+     document.getElementById('option4Results').textContent = '';
+     document.getElementById('pollTitle').textContent = '';
+     document.getElementById('option1').textContent = '';
+     document.getElementById('option2').textContent = '';
+     document.getElementById('option3').textContent = '';
+     document.getElementById('option4').textContent = '';
+}
 
-     document.getElementById('shareTab').style.display = 'block';
-     document.getElementById('pollId').textContent = pollData.id;
+function resetMake(){
+     document.getElementById('question').value = '';
+     document.getElementById('option1Input').value = '';
+     document.getElementById('option2Input').value = '';
+     document.getElementById('option3Input').value = '';
+     document.getElementById('option4Input').value = '';
+     document.getElementById('makePollError').textContent = '';
+     document.getElementById('shareLink').value = '';
+     document.getElementById('shareTab').style.display = 'none';
 }
