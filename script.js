@@ -30,7 +30,7 @@ let pollData = {
 document.getElementById('findPollBtn').addEventListener('click', () => {
      const pollId = document.getElementById('accessCode').value.toUpperCase();
      if (pollId) {
-          fetch(`https://getdocument-ldhb2q24ra-uc.a.run.app?id=${pollId}`)
+          fetch(`https://getdocument-ldhb2q24ra-uc.a.run.app?id=poll_${pollId}`)
                .then(response => {
                     if (!response.ok) {
                          throw new Error(response.status);
