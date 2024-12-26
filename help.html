@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Easy Polls User Manual</title>
+</head>
+<link rel="stylesheet" href="style.css">
+<style>
+    body{
+        background-color: white;
+        color: black;
+        padding: 20px;
+        font-size: 14pt;
+        height: 100vh;
+        font-family: 'Times New Roman', Times, serif;
+    }
+</style>
+
+<body>
+    <nav>
+        <p>Easy Polls User Manual</p>
+        <button id="zoomIn">+</button>
+        <span id="zoomReset">14</span>pt
+        <button id="zoomOut">-</button>
+    </nav>
+    <br><br>
+    <hr>
+    <h1>Easy Polls Manual</h1>
+    <h2>How to use this document viewer</h2>
+    <ul>
+        <li>Click the "+" button to increase the font size.</li>
+        <li>Click the "-" button to decrease the font size.</li>
+        <li>Click the "14pt" button to reset the font size to 14pt.</li>
+    </ul>
+    <h2>How to access a poll</h2>
+    <h3>Access</h3>
+    <p>Click the "Find Poll" tab to access a poll. Enter the access code and click "Access Poll". This code will be given to you from the maker of the poll.</p>
+    <h3>Vote</h3>
+    <p>After accessing a poll, you can vote on the poll. Click the option you want to vote for.</p>
+    <h3>Results</h3>
+    <p>After voting, you can view the results of the poll. The results will be displayed as a percentage of votes for each option. There is a bar graph to show the relationship of each value.</p>
+    <h3>Vote on another</h3>
+    <p>After viewing the results, you can vote on another poll. This will redirect you to the access page to vote on another poll.</p>
+    <h2>How to make a poll</h2>
+    <h3>Make</h3>
+    <p>Click the "Make Poll" tab to make a poll. Enter the question and options for the poll. Click "Make Poll" to create the poll. There must be at least 2 options, for a max of 4.</p>
+    <h3>Access Code</h3>
+    <p>After making a poll, you will be given an access code. This code can be shared with others to access the poll. You can click on the box to copy the send message.</p>
+    <h2>How data is stored</h2>
+    <p>
+        All data is stored in a database. The data includes:
+        <ul>
+            <li>Access code</li>
+            <li>Question</li>
+            <li>Options</li>
+            <li>Votes</li>
+        </ul>
+        While the data is theoretically secure, do not store sensitive information in the polls. We do not guarantee the security of the data. Please note: the data is not encrypted. As admins, we can access every poll.
+    </p>
+    <h2>Terms</h2>
+    <p>
+        By using the service, you agree to the terms of service. The terms of service include:
+        <ul>
+            <li>Do not use the service for illegal purposes.</li>
+            <li>Do not store sensitive information in the polls.</li>
+            <li>Do not use the service for malicious purposes.</li>
+        </ul>
+        You acknowledge that:
+        <ul>
+            <li>You release EF0601 and his associates and anyone who maintains, builds, or operates the service and its website from any liability.</li>
+            <li>You understand that the service is not guaranteed to be secure.</li>
+            <li>You understand that the service is not guaranteed to be available.</li>
+            <li>EF0601 may terminate the service at any time, without prior knowledge.</li>
+            <li>We may refuse service to anyone, regardless of reason.</li>
+        </ul>
+    </p>
+
+</body>
+
+<script>
+    document.getElementById("zoomIn").addEventListener("click", function () {
+        let fontSize = parseInt(document.querySelector("span").textContent);
+        if (fontSize < 30) {
+            fontSize++;
+            document.querySelector("span").textContent = fontSize;
+            document.querySelector("body").style.fontSize = fontSize + "pt";
+        }
+    });
+    document.getElementById("zoomOut").addEventListener("click", function () {
+        let fontSize = parseInt(document.querySelector("span").textContent);
+        if (fontSize > 5) {
+            fontSize--;
+            document.querySelector("span").textContent = fontSize;
+            document.querySelector("body").style.fontSize = fontSize + "pt";
+        }
+    });
+    document.getElementById("zoomReset").addEventListener("click", function () {
+        document.querySelector("span").textContent = 14;
+        document.querySelector("body").style.fontSize = "14pt";
+    });
+</script>
+
+</html>

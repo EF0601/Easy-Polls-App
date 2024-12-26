@@ -1,7 +1,58 @@
+/* DEFAULTS. This is so that the elements look the same on most devices. */
 *{
      padding: 0;
      margin: 0;
      box-sizing: border-box;
+}
+
+button{
+    appearance: auto;
+    text-rendering: auto;
+    color: buttontext;
+    letter-spacing: normal;
+    word-spacing: normal;
+    line-height: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: center;
+    align-items: flex-start;
+    cursor: default;
+    box-sizing: border-box;
+    background-color: buttonface;
+    margin: 0em;
+    padding-block: 1px;
+    padding-inline: 6px;
+    border-width: 1px;
+    border-style: outset;
+    border-color: buttonborder;
+    border-image: initial;
+}
+
+input {
+    text-rendering: auto;
+    color: fieldtext;
+    letter-spacing: normal;
+    word-spacing: normal;
+    line-height: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+    appearance: auto;
+    -webkit-rtl-ordering: logical;
+    cursor: text;
+    background-color: field;
+    margin: 0em;
+    padding: 1px 0px;
+    border-width: 1px;
+    border-style: inset;
+    border-color: light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+    border-image: initial;
+    padding-block: 1px;
+    padding-inline: 2px;
 }
 
 @font-face {
@@ -11,6 +62,10 @@
 
 body{
      background-color: rgb(80, 45, 45);
+}
+
+iframe{
+     border: 1px solid black;
 }
 
 #screen{
@@ -89,7 +144,9 @@ body{
 #makeTab input,
 #makeTab button,
 #accessTab input,
-#accessTab button{
+#accessTab button,
+#reportPoll button,
+#error button{
      width: 80%;
      margin: auto;
      padding: 5px;
@@ -118,4 +175,32 @@ footer{
      text-align: center;
      padding: 10px;
      font-size: 30px;
+}
+
+dialog{
+     display: none;
+     text-align: center;
+     padding: 10px;
+     font-size: 20px;
+     font-family: 'Poppins';
+     position: fixed;
+     top: 50%;
+     left: 50%;
+     transform: translate(-50%, -50%);
+     background-color: white;
+     border: 2px solid black;
+     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+     z-index: 1000;
+     width: 80%;
+     max-width: 500px;
+     padding: 20px;
+}
+#reportPollText{
+     text-align: left;
+     padding: 10px;
+     font-size: 20px;
+     font-family: 'Times New Roman', Times, serif;
+     width: 80%;
+     height: 400px;
+     resize: none;
 }

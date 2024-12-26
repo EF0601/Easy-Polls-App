@@ -1,99 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Easy Polls</title>
-    <link rel="stylesheet" href="./style.css" />
-  </head>
-  <body>
-    <div id="screen">
-      <div id="about">
-        <h1>Easy polls</h1>
-        <p>An <i>eas</i>ier way to poll.</p>
-      </div>
-      <div id="tabBtns">
-        <button id="accessTabBtn" class="tabBtn">
-          <span>Find Poll</span>
-        </button>
-        <button id="makeTabBtn" class="tabBtn">
-          <span>Make Poll</span>
-        </button>
-      </div>
-      <div id="tabs">
-        <div id="accessTab" class="tab">
-          <!-- <p id="findPollProgressBar">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Easy Polls</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+
+<dialog id="reportPoll">
+  <h1>Poll reporting</h1>
+  <p>Please do not misuse the feature. If deemed necessary, the poll will be taken down.</p>
+  <textarea placeholder="Reason for reporting (500 chars max)" maxlength="500" id="reportPollText"></textarea><br>
+  <button onclick="reportPoll()">Report</button>
+</dialog>
+<dialog id="error">
+  <h1>An error occurred</h1>
+  <p>Whoops, an error occurred. Additional information:</p>
+  <code id="errorInfo">Nothing yet.</code><br>
+  <button onclick="document.getElementById('error').style.display = 'none';">Close</button>
+</dialog>
+
+<body>
+  <div id="screen">
+    <div id="about">
+      <h1>Easy polls</h1>
+      <p>An <i>eas</i>ier way to poll.</p>
+    </div>
+    <div id="tabBtns">
+      <button id="accessTabBtn" class="tabBtn">
+        <span>Find Poll</span>
+      </button>
+      <button id="makeTabBtn" class="tabBtn">
+        <span>Make Poll</span>
+      </button>
+      <button id="helpTabBtn" class="tabBtn">
+        <span>Help</span>
+      </button>
+    </div>
+    <div id="tabs">
+      <div id="accessTab" class="tab">
+        <!-- <p id="findPollProgressBar">
             <span id="findPollProgressBarInnerPart"
               >Step <span id="findPollStep">1</span> out of 3.</span
             > -->
-          </p>
-          <div id="findTab">
-            <h2>Find Poll</h2>
-            <input
-              type="text"
-              id="accessCode"
-              placeholder="ABC123"
-              required
-              maxlength="6" /><br />
-            <button type="submit" id="findPollBtn">Access Poll</button>
-            <div id="accessCodeError"></div>
-          </div><br>
-          <div id="voteTab">
-            <hr>
-            <h2>Vote On Poll <span class="pollIdDisplay">123ABC</span></h2>
-            <p id="pollTitle"></p>
-            <button id="option1" onclick="vote(1)"></button>
-            <button id="option2" onclick="vote(2)"></button>
-            <button id="option3" onclick="vote(3)"></button>
-            <button id="option4" onclick="vote(4)"></button>
-          </div><br>
-          <div id="resultsTab">
-            <hr>
-            <h2>Results For Poll <span class="pollIdDisplay">123ABC</span></h2><br>
-            <div id="results">
-              <div id="option1Results"></div>
-              <div id="option2Results"></div>
-              <div id="option3Results"></div>
-              <div id="option4Results"></div>
-            </div>
-            <button onclick="resetVoting()">Vote on another</button>
+        </p>
+        <div id="findTab">
+          <h2>Find Poll</h2>
+          <input type="text" id="accessCode" placeholder="ABC123" required maxlength="6" /><br />
+          <button type="submit" id="findPollBtn">Access Poll</button>
+        </div><br>
+        <div id="voteTab">
+          <hr>
+          <h2>Vote On Poll <span class="pollIdDisplay">123ABC</span></h2>
+          <p id="pollTitle"></p>
+          <button id="option1" onclick="vote(1)"></button>
+          <button id="option2" onclick="vote(2)"></button>
+          <button id="option3" onclick="vote(3)"></button>
+          <button id="option4" onclick="vote(4)"></button>
+        </div><br>
+        <div id="resultsTab">
+          <hr>
+          <h2>Results For Poll <span class="pollIdDisplay">123ABC</span></h2><br>
+          <div id="results">
+            <div id="option1Results"></div>
+            <div id="option2Results"></div>
+            <div id="option3Results"></div>
+            <div id="option4Results"></div>
           </div>
-        </div>
-        <div id="makeTab" class="tab">
-          <h2>Make Poll</h2>
-          <input
-            type="text"
-            id="question"
-            placeholder="Enter question"
-            required />
-          <br />
-          <input type="text" id="option1Input" placeholder="Option 1" required />
-          <br />
-          <input type="text" id="option2Input" placeholder="Option 2" required />
-          <br />
-          <input type="text" id="option3Input" placeholder="Option 3" required />
-          <br />
-          <input type="text" id="option4Input" placeholder="Option 4" required />
-          <br />
-          <button onclick="makePoll()">Make Poll</button><br><br>
-          <div id="makePollError"></div>
-          <div id="shareTab">
-            <hr>
-            <h2>Share Poll</h2>
-            <p>Share this this poll to whoever you wish to share it with. Use this message:</p>
-            <input type="text" id="shareLink" readonly>
-            <button onclick="resetMake()">Make another</button>
-          </div>
-          
+          <button onclick="resetVoting()">Vote on another</button>
+          <button onclick="document.getElementById('reportPoll').style.display = 'block';">Report the poll</button>
+
         </div>
       </div>
-      <!-- <footer>
+      <div id="makeTab" class="tab">
+        <h2>Make Poll</h2>
+        <input type="text" id="question" placeholder="Enter question" required maxlength="300" />
+        <br />
+        <input type="text" id="option1Input" placeholder="Option 1" required maxlength="200" />
+        <br />
+        <input type="text" id="option2Input" placeholder="Option 2" required maxlength="200" />
+        <br />
+        <input type="text" id="option3Input" placeholder="Option 3" required maxlength="200" />
+        <br />
+        <input type="text" id="option4Input" placeholder="Option 4" required maxlength="200" />
+        <br />
+        <button onclick="makePoll()">Make Poll</button><br><br>
+        <div id="shareTab">
+          <hr>
+          <h2>Share Poll</h2>
+          <p>Share this this poll to whoever you wish to share it with. Use this message:</p>
+          <input type="text" id="shareLink" readonly>
+          <button onclick="resetMake()">Make another</button>
+        </div>
+
+      </div>
+      <div id="helpTab" class="tab">
+        <h2>Help</h2>
+        <iframe src="./help.html" frameborder="0" height="330"></iframe>
+      </div>
+    </div>
+    <!-- <footer>
         <p>
           Licensed under the MIT License. (C) 2024 EF-0601. Please read our
           usage policy and privacy policy.
         </p>
       </footer> -->
-    </div>
-  </body>
-  <script src="./script.js"></script>
+  </div>
+</body>
+<script src="./script.js"></script>
+
 </html>

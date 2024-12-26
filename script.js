@@ -1,19 +1,31 @@
 //tabs
 const findPollTabBtn = document.getElementById('accessTabBtn');
 const findMakePollTabBtn = document.getElementById('makeTabBtn');
+const helpTabBtn = document.getElementById('helpTabBtn');
 
 const findPollTab = document.getElementById('accessTab');
 const findMakePollTab = document.getElementById('makeTab');
+const helpTab = document.getElementById('helpTab');
 
 findPollTabBtn.addEventListener('click', () => {
+     helpTab.style.display = 'none';
      findPollTab.style.display = 'block';
      findMakePollTab.style.display = 'none';
 });
 
 findMakePollTabBtn.addEventListener('click', () => {
+     helpTab.style.display = 'none';
      findPollTab.style.display = 'none';
      findMakePollTab.style.display = 'block';
 });
+
+helpTabBtn.addEventListener('click', () => {
+     helpTab.style.display = 'block';
+     findPollTab.style.display = 'none';
+     findMakePollTab.style.display = 'none';
+});
+
+findPollTabBtn.click();
 
 //poll finding
 const accessCodeError = document.getElementById('accessCodeError');
@@ -25,6 +37,11 @@ let pollData = {
      option2: ["", 0],
      option3: ["", 0],
      option4: ["", 0],
+};
+
+function displayError(message){
+     document.getElementById('errorInfo').textContent = message;
+     document.getElementById('error').style.display = 'block';
 }
 
 document.getElementById('findPollBtn').addEventListener('click', () => {
@@ -55,7 +72,7 @@ document.getElementById('findPollBtn').addEventListener('click', () => {
                          pollData.option1[1] = data.option1[1];
                          pollData.option2[1] = data.option2[1];
                          pollData.id = pollId;
-                         
+
                          document.getElementById('pollTitle').textContent = pollData.title;
                          document.getElementById('option1').textContent = pollData.option1[0];
                          document.getElementById('option2').textContent = pollData.option2[0];
@@ -65,7 +82,6 @@ document.getElementById('findPollBtn').addEventListener('click', () => {
                          Array.from(document.getElementsByClassName('pollIdDisplay')).forEach(element => {
                               element.textContent = pollData.id;
                          });
-                         document.getElementById('accessCodeError').textContent = '';
                     } else {
                          accessCodeError.textContent = 'Poll not found';
                     }
@@ -73,19 +89,19 @@ document.getElementById('findPollBtn').addEventListener('click', () => {
                .catch(err => {
                     switch (err.message) {
                          case '404':
-                              accessCodeError.textContent = '404: Poll not found. Does the poll ID match?';
+                              displayError('404: Poll not found. Does the access code match?');
                               break;
                          case '403':
-                              accessCodeError.textContent = '403: Access denied. Are you using an unauthorized client?';
+                              displayError('403: Access denied. Are you using an unauthorized client?');
                               break;
                          case '500':
-                              accessCodeError.textContent = '500: An internal server error occurred';
+                              displayError('500: An internal server error occurred. Nothing can be done on your end.');
                               break;
                          case '400':
-                              accessCodeError.textContent = '400: Bad request; error occurred';
+                              displayError('400: Bad request; error occurred');
                               break;
                          default:
-                              accessCodeError.textContent = `${err.message}: An error occurred`;
+                              displayError(`${err.message}: An error occurred`);
                               break;
                     }
                });
@@ -126,6 +142,7 @@ function vote(num){
      })
      .catch(err => {
           console.error(err);
+          displayError(err);
      });
      const totalVotes = pollData.option1[1] + pollData.option2[1] + pollData.option3[1] + pollData.option4[1];
 
@@ -158,7 +175,7 @@ function makePoll(){
                option2: [document.getElementById('option2Input').value, 0],
                option3: [document.getElementById('option3Input').value, 0],
                option4: [document.getElementById('option4Input').value, 0]
-          }
+          };
           if(document.getElementById('option3Input').value){
                pollData.option3[0] = document.getElementById('option3Input').value;
           }
@@ -179,7 +196,7 @@ function makePoll(){
           })
           .catch(err => {
                console.error(err);
-               document.getElementById('makePollError').textContent = err;
+               displayError(err);
           });
           document.getElementById('shareLink').value = `Vote for my poll on https://ef0601.github.io/Easy-Polls-App, with ID ${pollData.id}`;
           document.getElementById('shareTab').style.display = 'block';
@@ -200,7 +217,6 @@ function resetVoting(){
      document.getElementById('voteTab').style.display = 'none';
      document.getElementById('accessCode').disabled = false;
      document.getElementById('accessCode').value = '';
-     document.getElementById('accessCodeError').textContent = '';
      document.getElementById('option1').disabled = false;
      document.getElementById('option2').disabled = false;
      document.getElementById('option3').disabled = false;
@@ -227,7 +243,34 @@ function resetMake(){
      document.getElementById('option2Input').value = '';
      document.getElementById('option3Input').value = '';
      document.getElementById('option4Input').value = '';
-     document.getElementById('makePollError').textContent = '';
      document.getElementById('shareLink').value = '';
      document.getElementById('shareTab').style.display = 'none';
+}
+
+function reportPoll() {
+     document.getElementById('reportPoll').style.display = 'none';
+
+     const pollId = document.getElementById('accessCode').value.toUpperCase();
+     const reason = document.getElementById('reportPollText').value;
+
+     const data = {
+          message: reason,
+     };
+
+     fetch(`https://reportpoll-ldhb2q24ra-uc.a.run.app?id=${pollId}`,{
+          method: 'POST',
+          headers: {
+               'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+     })
+     .then(response => {
+          if (!response.ok) {
+               throw new Error(response.status);
+          }
+     })
+     .catch(err => {
+          displayError(err);
+     });
+
 }
