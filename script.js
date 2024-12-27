@@ -61,7 +61,7 @@ document.getElementById('findPollBtn').addEventListener('click', () => {
                          pollData.title = data.title;
                          pollData.option1[0] = data.option1[0];
                          pollData.option2[0] = data.option2[0];
-                         if(data.option3[0]){
+                         if(data.option3[0] && data.option3[0] != ''){
                               pollData.option3[0] = data.option3[0];
                               pollData.option3[1] = data.option3[1];
                               document.getElementById('option3').style.display = 'block';
@@ -73,7 +73,7 @@ document.getElementById('findPollBtn').addEventListener('click', () => {
                               document.getElementById('option3').style.display = 'none';
                               document.getElementById('option3Results').style.display = 'none';
                          }
-                         if(data.option4[0]){
+                         if(data.option4[0] && data.option4[0] != ''){
                               pollData.option4[0] = data.option4[0];
                               pollData.option4[1] = data.option4[1];
                               document.getElementById('option4').style.display = 'block';
