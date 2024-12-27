@@ -64,10 +64,26 @@ document.getElementById('findPollBtn').addEventListener('click', () => {
                          if(data.option3[0]){
                               pollData.option3[0] = data.option3[0];
                               pollData.option3[1] = data.option3[1];
+                              document.getElementById('option3').style.display = 'block';
+                              document.getElementById('option3Results').style.display = 'block';
+                         }
+                         else{
+                              pollData.option3[0] = '';
+                              pollData.option3[1] = 0;
+                              document.getElementById('option3').style.display = 'none';
+                              document.getElementById('option3Results').style.display = 'none';
                          }
                          if(data.option4[0]){
                               pollData.option4[0] = data.option4[0];
                               pollData.option4[1] = data.option4[1];
+                              document.getElementById('option4').style.display = 'block';
+                              document.getElementById('option4Results').style.display = 'block';
+                         }
+                         else{
+                              pollData.option4[0] = '';
+                              pollData.option4[1] = 0;
+                              document.getElementById('option4').style.display = 'none';
+                              document.getElementById('option4Results').style.display = 'none';
                          }
                          pollData.option1[1] = data.option1[1];
                          pollData.option2[1] = data.option2[1];
@@ -235,6 +251,15 @@ function resetVoting(){
      document.getElementById('option2').textContent = '';
      document.getElementById('option3').textContent = '';
      document.getElementById('option4').textContent = '';
+
+     pollData = {
+          title: '',
+          id: '',
+          option1: ["", 0],
+          option2: ["", 0],
+          option3: ["", 0],
+          option4: ["", 0],
+     };
 }
 
 function resetMake(){
