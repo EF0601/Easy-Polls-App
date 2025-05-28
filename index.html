@@ -12,7 +12,10 @@
   <h1>Poll reporting</h1>
   <p>Please do not misuse the feature. If deemed necessary, the poll will be taken down.</p>
   <textarea placeholder="Reason for reporting (500 chars max)" maxlength="500" id="reportPollText"></textarea><br>
-  <button onclick="reportPoll()">Report</button>
+  <div class="twoColumns">
+    <button onclick="document.getElementById('reportPoll').style.display='none'">Cancel</button>
+    <button onclick="reportPoll()">Report</button>
+  </div>
 </dialog>
 <dialog id="error">
   <h1>An error occurred</h1>

@@ -273,8 +273,6 @@ function resetMake(){
 }
 
 function reportPoll() {
-     document.getElementById('reportPoll').style.display = 'none';
-
      const pollId = document.getElementById('accessCode').value.toUpperCase();
      const reason = document.getElementById('reportPollText').value;
 
@@ -292,6 +290,14 @@ function reportPoll() {
      .then(response => {
           if (!response.ok) {
                throw new Error(response.status);
+          }
+          else{
+               document.getElementById('reportPollText').value = 'Successfully reported poll. Thank you for your feedback!';
+               setTimeout(() => {
+                    document.getElementById('reportPollText').value = '';
+                    document.getElementById('reportPoll').style.display = 'none';
+               }
+               , 2000);
           }
      })
      .catch(err => {

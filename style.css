@@ -200,7 +200,12 @@ dialog{
      padding: 10px;
      font-size: 20px;
      font-family: 'Times New Roman', Times, serif;
-     width: 80%;
+     width: 90%;
      height: 400px;
      resize: none;
+} 
+
+.twoColumns{
+     display: grid;
+     grid-template-columns: 50% 50%;
 }
