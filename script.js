@@ -42,20 +42,27 @@ let pollData = {
 function displayError(message){
      document.getElementById('errorInfo').textContent = message;
      document.getElementById('error').style.display = 'block';
+     document.getElementById('loader1').style.display = 'none';
+     document.getElementById('loader2').style.display = 'none';
 }
 
 document.getElementById('findPollBtn').addEventListener('click', () => {
+     document.getElementById('loader1').style.display = 'block';
+
      const pollId = document.getElementById('accessCode').value.toUpperCase();
      if (pollId) {
-          fetch(`https://getdocument-ldhb2q24ra-uc.a.run.app?id=poll_${pollId}`)
+          fetch(`https://getdocument-ldhb2q24ra-uc.a.run.app?id=poll_${pollId}&auth=crazy-potato`)
                .then(response => {
                     if (!response.ok) {
                          throw new Error(response.status);
                     }
+                    document.getElementById('loader1').style.display = 'none';
                     return response.json();
                })
                .then(data => {
+                    document.getElementById('loader1').style.display = 'none';
                     if (data) {
+
                          document.getElementById('voteTab').style.display = 'block';
                          document.getElementById('accessCode').disabled = true;
                          pollData.title = data.title;
@@ -125,6 +132,8 @@ document.getElementById('findPollBtn').addEventListener('click', () => {
 });
 
 function vote(num){
+     document.getElementById('loader1').style.display = 'block';
+
      document.getElementById('resultsTab').style.display = 'block';
      document.getElementById('option1').disabled = true;
      document.getElementById('option2').disabled = true;
@@ -155,6 +164,7 @@ function vote(num){
           if (!response.ok) {
                throw new Error(response.status);
           }
+          document.getElementById('loader1').style.display = 'none';
      })
      .catch(err => {
           console.error(err);
@@ -183,6 +193,7 @@ function generateID(){
 }
 
 function makePoll(){
+     document.getElementById('loader2').style.display = 'block';
      if(document.getElementById('option1Input').value != "" && document.getElementById('option2Input').value != "" && document.getElementById('question').value != ""){
           const pollData = {
                title: document.getElementById('question').value,
@@ -206,6 +217,7 @@ function makePoll(){
                body: JSON.stringify(pollData)
           })
           .then(response => {
+               document.getElementById('loader2').style.display = 'none';
                if (!response.ok) {
                     throw new Error(response.status);
                }
