@@ -26,7 +26,7 @@ document.getElementById('findPollBtn').addEventListener('click', () => {
 
      const pollId = document.getElementById('accessCode').value.toUpperCase();
      if (pollId) {
-          fetch(`https://getdocument-ldhb2q24ra-uc.a.run.app?id=poll_${pollId}&auth=chill-carrot`)
+          fetch(`https://getdocument-ldhb2q24ra-uc.a.run.app?id=poll_${pollId}`)
                .then(response => {
                     if (!response.ok) {
                          throw new Error(response.status);
@@ -188,7 +188,7 @@ function makePoll(){
           if(document.getElementById('option4Input').value){
                pollData.option4[0] = document.getElementById('option4Input').value;
           }
-          fetch(`https://adddocument-ldhb2q24ra-uc.a.run.app?id=poll_${pollData.id}&auth=chill-carrot`, {
+          fetch(`https://adddocument-ldhb2q24ra-uc.a.run.app?id=poll_${pollData.id}`, {
                method: 'POST',
                headers: {
                     'Content-Type': 'application/json'
