@@ -1,31 +1,4 @@
-//tabs
-const findPollTabBtn = document.getElementById('accessTabBtn');
-const findMakePollTabBtn = document.getElementById('makeTabBtn');
-const helpTabBtn = document.getElementById('helpTabBtn');
-
-const findPollTab = document.getElementById('accessTab');
-const findMakePollTab = document.getElementById('makeTab');
-const helpTab = document.getElementById('helpTab');
-
-findPollTabBtn.addEventListener('click', () => {
-     helpTab.style.display = 'none';
-     findPollTab.style.display = 'block';
-     findMakePollTab.style.display = 'none';
-});
-
-findMakePollTabBtn.addEventListener('click', () => {
-     helpTab.style.display = 'none';
-     findPollTab.style.display = 'none';
-     findMakePollTab.style.display = 'block';
-});
-
-helpTabBtn.addEventListener('click', () => {
-     helpTab.style.display = 'block';
-     findPollTab.style.display = 'none';
-     findMakePollTab.style.display = 'none';
-});
-
-findPollTabBtn.click();
+const { version } = require("react");
 
 //poll finding
 const accessCodeError = document.getElementById('accessCodeError');
@@ -37,6 +10,8 @@ let pollData = {
      option2: ["", 0],
      option3: ["", 0],
      option4: ["", 0],
+     version: 2,
+     publicPoll: false,
 };
 
 function displayError(message){
@@ -51,7 +26,7 @@ document.getElementById('findPollBtn').addEventListener('click', () => {
 
      const pollId = document.getElementById('accessCode').value.toUpperCase();
      if (pollId) {
-          fetch(`https://getdocument-ldhb2q24ra-uc.a.run.app?id=poll_${pollId}&auth=crazy-potato`)
+          fetch(`https://getdocument-ldhb2q24ra-uc.a.run.app?id=poll_${pollId}&auth=chill-carrot`)
                .then(response => {
                     if (!response.ok) {
                          throw new Error(response.status);
@@ -95,6 +70,8 @@ document.getElementById('findPollBtn').addEventListener('click', () => {
                          pollData.option1[1] = data.option1[1];
                          pollData.option2[1] = data.option2[1];
                          pollData.id = pollId;
+                         pollData.version = data.version;
+                         pollData.publicPoll = data.publicPoll;
 
                          document.getElementById('pollTitle').textContent = pollData.title;
                          document.getElementById('option1').textContent = pollData.option1[0];
@@ -201,7 +178,9 @@ function makePoll(){
                option1: [document.getElementById('option1Input').value, 0],
                option2: [document.getElementById('option2Input').value, 0],
                option3: [document.getElementById('option3Input').value, 0],
-               option4: [document.getElementById('option4Input').value, 0]
+               option4: [document.getElementById('option4Input').value, 0],
+               version: 2,
+               publicPoll: document.getElementById('allowPublic').checked,
           };
           if(document.getElementById('option3Input').value){
                pollData.option3[0] = document.getElementById('option3Input').value;
@@ -209,7 +188,7 @@ function makePoll(){
           if(document.getElementById('option4Input').value){
                pollData.option4[0] = document.getElementById('option4Input').value;
           }
-          fetch(`https://adddocument-ldhb2q24ra-uc.a.run.app?id=poll_${pollData.id}`, {
+          fetch(`https://adddocument-ldhb2q24ra-uc.a.run.app?id=poll_${pollData.id}&auth=chill-carrot`, {
                method: 'POST',
                headers: {
                     'Content-Type': 'application/json'
