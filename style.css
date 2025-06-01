@@ -66,6 +66,8 @@ body{
 
 iframe{
      border: 1px solid black;
+     margin: auto;
+     margin-top: 10px;
 }
 
 #screen{
@@ -205,7 +207,7 @@ dialog{
      width: 90%;
      height: 400px;
      resize: none;
-} 
+}
 
 .twoColumns{
      display: grid;

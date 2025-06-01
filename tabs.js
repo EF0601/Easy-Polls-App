@@ -5,7 +5,7 @@ const moreTabBtn = document.getElementById('moreTabBtn');
 
 const findPollTab = document.getElementById('accessTab');
 const findMakePollTab = document.getElementById('makeTab');
-const helpTab = document.getElementById('moreTab');
+const moreTab = document.getElementById('moreTab');
 
 findPollTabBtn.addEventListener('click', () => {
      moreTab.style.display = 'none';
@@ -28,3 +28,20 @@ moreTabBtn.addEventListener('click', () => {
 findPollTabBtn.click();
 
 //more tabs
+
+const publicPollsTab = document.getElementById('publicPollsTab');
+const helpTab = document.getElementById('helpTab');
+
+const publicPollsTabBtn = document.getElementById('publicPollsTabBtn');
+const helpTabBtn = document.getElementById('helpTabBtn');
+
+publicPollsTabBtn.addEventListener('click', () => {
+     helpTab.style.display = 'none';
+     publicPollsTab.style.display = 'block';
+});
+helpTabBtn.addEventListener('click', () => {
+     publicPollsTab.style.display = 'none';
+     helpTab.style.display = 'block';
+});
+
+publicPollsTabBtn.click();

@@ -92,8 +92,8 @@
           <button onclick="document.getElementById('reportPoll').style.display = 'block';">Report the poll</button>
 
         </div>
-        
-        <div id= "loader1" class="loader"></div>
+
+        <div id="loader1" class="loader"></div>
       </div>
       <div id="makeTab" class="tab">
         <h2>Make Poll</h2>
@@ -122,26 +122,27 @@
       <div id="moreTab" class="tab">
         <h2>More</h2>
         <div class="grid">
-          <button>Public Polls</button>
-          <button>View Poll</button>
-          <button>Add-ons</button>
-          <button>Help</button>
+          <button id="publicPollsTabBtn">Public Polls</button>
+          <button id="viewPollTabBtn">View Poll</button>
+          <button id="addOnsTabBtn">Add-ons</button>
+          <button id="helpTabBtn">Help</button>
         </div>
         <iframe src="./help.html" frameborder="0" height="330" id="helpTab"></iframe>
-        #<div id="publicPollsTab">
+        <div id="publicPollsTab">
           <h2>Public Polls</h2>
-          <p>Polls that are made publically are displayed here.</p>
-          <button id="loadPublicPollsBtn">Load Public Polls</button>
+          <p>Polls that are made publicly are displayed here.</p>
+          <button id="loadPublicPollsBtn" onclick="getPublicPolls()">Load Public Polls</button>
           <div id="publicPollsList"></div>
+        </div>
+        <div id="loader3" class="loader"></div>
       </div>
-    </div>
-    <!-- <footer>
+      <!-- <footer>
         <p>
           Licensed under the MIT License. (C) 2024 EF-0601. Please read our
           usage policy and privacy policy.
         </p>
       </footer> -->
-  </div>
+    </div>
 </body>
 <script src="./script.js"></script>
 <script src="./tabs.js"></script>

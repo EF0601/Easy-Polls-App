@@ -1,4 +1,26 @@
-const { version } = require("react");
+// recognize query parameters
+const currentUrl = window.location.href;
+console.log("Current URL:", currentUrl);
+const url = new URL(currentUrl);
+const queryString = url.search;
+console.log("Full Query String:", queryString);
+
+// Create a URLSearchParams object to easily access individual parameters
+const params = new URLSearchParams(queryString);
+
+// Check if a specific parameter exists
+if (params.has('id')) {
+     // Get the value of the 'id' parameter
+     const pollId = params.get('id').toUpperCase();
+     console.log("Poll ID:", pollId);
+
+     if(pollId.length === 6){
+          document.getElementById('accessCode').value = pollId;
+          setTimeout(() => {
+               document.getElementById('findPollBtn').click();
+          }, 50);
+     }
+}
 
 //poll finding
 const accessCodeError = document.getElementById('accessCodeError');
@@ -111,7 +133,6 @@ document.getElementById('findPollBtn').addEventListener('click', () => {
 function vote(num){
      document.getElementById('loader1').style.display = 'block';
 
-     document.getElementById('resultsTab').style.display = 'block';
      document.getElementById('option1').disabled = true;
      document.getElementById('option2').disabled = true;
      document.getElementById('option3').disabled = true;
@@ -142,11 +163,13 @@ function vote(num){
                throw new Error(response.status);
           }
           document.getElementById('loader1').style.display = 'none';
+          document.getElementById('resultsTab').style.display = 'block';
      })
      .catch(err => {
           console.error(err);
           displayError(err);
      });
+
      const totalVotes = pollData.option1[1] + pollData.option2[1] + pollData.option3[1] + pollData.option4[1];
 
      document.getElementById('option1Results').textContent = `${pollData.option1[1]} votes`;
@@ -196,24 +219,25 @@ function makePoll(){
                body: JSON.stringify(pollData)
           })
           .then(response => {
-               document.getElementById('loader2').style.display = 'none';
                if (!response.ok) {
                     throw new Error(response.status);
                }
+
+               document.getElementById('loader2').style.display = 'none';
+               document.getElementById('shareLink').value = `https://ef0601.github.io/Easy-Polls-App?id=${pollData.id}`;
+               document.getElementById('shareTab').style.display = 'block';
           })
           .catch(err => {
                console.error(err);
                displayError(err);
           });
-          document.getElementById('shareLink').value = `Vote for my poll on https://ef0601.github.io/Easy-Polls-App, with ID ${pollData.id}`;
-          document.getElementById('shareTab').style.display = 'block';
      }
 }
 
 const shareLink = document.getElementById('shareLink');
 shareLink.addEventListener('click', () => {
      const oldText = shareLink.value;
-     navigator.clipboard.writeText(shareLink.value);
+     navigator.clipboard.writeText(oldText);
      shareLink.value = 'Copied to clipboard!';
      setTimeout(() => {
           shareLink.value = oldText;
@@ -287,12 +311,57 @@ function reportPoll() {
                setTimeout(() => {
                     document.getElementById('reportPollText').value = '';
                     document.getElementById('reportPoll').style.display = 'none';
-               }
-               , 2000);
+               }, 2000);
           }
      })
      .catch(err => {
           displayError(err);
      });
 
+}
+
+function getPublicPolls(){
+     document.getElementById('loader3').style.display = 'block';
+
+     fetch(`https://getpublicpolls-ldhb2q24ra-uc.a.run.app?`, {
+          method: 'GET',
+          headers: {
+               'Content-Type': 'application/json'
+          }
+     })
+     .then(response => {
+          if (!response.ok) {
+               throw new Error(response.status);
+          }
+          return response.json();
+     })
+     .then(data => {
+          console.log(data);
+          document.getElementById('loader3').style.display = 'none';
+          const publicPollsList = document.getElementById('publicPollsList');
+          const publicPolls = data.documents || [];
+          publicPollsList.innerHTML = ''; // Clear previous list
+
+          if (publicPolls.length === 0) {
+               publicPollsList.innerHTML = '<li>No public polls available.</li>';
+          } else {
+               publicPolls.forEach(poll => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `${poll.data.title} (ID: ${poll.data.id})`;
+                    listItem.addEventListener('click', () => {
+                         document.getElementById('accessCode').value = poll.data.id;
+                         document.getElementById('findPollBtn').click();
+
+                         moreTab.style.display = 'none';
+                         findPollTab.style.display = 'block';
+                         findMakePollTab.style.display = 'none';
+                    });
+                    publicPollsList.appendChild(listItem);
+               });
+          }
+     })
+     .catch(err => {
+          document.getElementById('loader3').style.display = 'none';
+          displayError(err);
+     });
 }
