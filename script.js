@@ -1,31 +1,23 @@
-//tabs
-const findPollTabBtn = document.getElementById('accessTabBtn');
-const findMakePollTabBtn = document.getElementById('makeTabBtn');
-const helpTabBtn = document.getElementById('helpTabBtn');
+// recognize query parameters
+const currentUrl = window.location.href;
+const url = new URL(currentUrl);
+const queryString = url.search;
 
-const findPollTab = document.getElementById('accessTab');
-const findMakePollTab = document.getElementById('makeTab');
-const helpTab = document.getElementById('helpTab');
+// Create a URLSearchParams object to easily access individual parameters
+const params = new URLSearchParams(queryString);
 
-findPollTabBtn.addEventListener('click', () => {
-     helpTab.style.display = 'none';
-     findPollTab.style.display = 'block';
-     findMakePollTab.style.display = 'none';
-});
+// Check if a specific parameter exists
+if (params.has('id')) {
+     // Get the value of the 'id' parameter
+     const pollId = params.get('id').toUpperCase();
 
-findMakePollTabBtn.addEventListener('click', () => {
-     helpTab.style.display = 'none';
-     findPollTab.style.display = 'none';
-     findMakePollTab.style.display = 'block';
-});
-
-helpTabBtn.addEventListener('click', () => {
-     helpTab.style.display = 'block';
-     findPollTab.style.display = 'none';
-     findMakePollTab.style.display = 'none';
-});
-
-findPollTabBtn.click();
+     if(pollId.length === 6){
+          document.getElementById('accessCode').value = pollId;
+          setTimeout(() => {
+               document.getElementById('findPollBtn').click();
+          }, 50);
+     }
+}
 
 //poll finding
 const accessCodeError = document.getElementById('accessCodeError');
@@ -37,6 +29,8 @@ let pollData = {
      option2: ["", 0],
      option3: ["", 0],
      option4: ["", 0],
+     version: 2,
+     publicPoll: false,
 };
 
 function displayError(message){
@@ -95,6 +89,8 @@ document.getElementById('findPollBtn').addEventListener('click', () => {
                          pollData.option1[1] = data.option1[1];
                          pollData.option2[1] = data.option2[1];
                          pollData.id = pollId;
+                         pollData.version = data.version;
+                         pollData.publicPoll = data.publicPoll;
 
                          document.getElementById('pollTitle').textContent = pollData.title;
                          document.getElementById('option1').textContent = pollData.option1[0];
@@ -134,7 +130,6 @@ document.getElementById('findPollBtn').addEventListener('click', () => {
 function vote(num){
      document.getElementById('loader1').style.display = 'block';
 
-     document.getElementById('resultsTab').style.display = 'block';
      document.getElementById('option1').disabled = true;
      document.getElementById('option2').disabled = true;
      document.getElementById('option3').disabled = true;
@@ -165,11 +160,13 @@ function vote(num){
                throw new Error(response.status);
           }
           document.getElementById('loader1').style.display = 'none';
+          document.getElementById('resultsTab').style.display = 'block';
      })
      .catch(err => {
           console.error(err);
           displayError(err);
      });
+
      const totalVotes = pollData.option1[1] + pollData.option2[1] + pollData.option3[1] + pollData.option4[1];
 
      document.getElementById('option1Results').textContent = `${pollData.option1[1]} votes`;
@@ -201,7 +198,9 @@ function makePoll(){
                option1: [document.getElementById('option1Input').value, 0],
                option2: [document.getElementById('option2Input').value, 0],
                option3: [document.getElementById('option3Input').value, 0],
-               option4: [document.getElementById('option4Input').value, 0]
+               option4: [document.getElementById('option4Input').value, 0],
+               version: 2,
+               publicPoll: document.getElementById('allowPublic').checked,
           };
           if(document.getElementById('option3Input').value){
                pollData.option3[0] = document.getElementById('option3Input').value;
@@ -217,24 +216,25 @@ function makePoll(){
                body: JSON.stringify(pollData)
           })
           .then(response => {
-               document.getElementById('loader2').style.display = 'none';
                if (!response.ok) {
                     throw new Error(response.status);
                }
+
+               document.getElementById('loader2').style.display = 'none';
+               document.getElementById('shareLink').value = `https://ef0601.github.io/Easy-Polls-App?id=${pollData.id}`;
+               document.getElementById('shareTab').style.display = 'block';
           })
           .catch(err => {
                console.error(err);
                displayError(err);
           });
-          document.getElementById('shareLink').value = `Vote for my poll on https://ef0601.github.io/Easy-Polls-App, with ID ${pollData.id}`;
-          document.getElementById('shareTab').style.display = 'block';
      }
 }
 
 const shareLink = document.getElementById('shareLink');
 shareLink.addEventListener('click', () => {
      const oldText = shareLink.value;
-     navigator.clipboard.writeText(shareLink.value);
+     navigator.clipboard.writeText(oldText);
      shareLink.value = 'Copied to clipboard!';
      setTimeout(() => {
           shareLink.value = oldText;

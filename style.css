@@ -1,130 +1,132 @@
 /* DEFAULTS. This is so that the elements look the same on most devices. */
-*{
-     padding: 0;
-     margin: 0;
-     box-sizing: border-box;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
-button{
-    appearance: auto;
-    text-rendering: auto;
-    color: buttontext;
-    letter-spacing: normal;
-    word-spacing: normal;
-    line-height: normal;
-    text-transform: none;
-    text-indent: 0px;
-    text-shadow: none;
-    display: inline-block;
-    text-align: center;
-    align-items: flex-start;
-    cursor: default;
-    box-sizing: border-box;
-    background-color: buttonface;
-    margin: 0em;
-    padding-block: 1px;
-    padding-inline: 6px;
-    border-width: 1px;
-    border-style: outset;
-    border-color: buttonborder;
-    border-image: initial;
+button {
+  appearance: auto;
+  text-rendering: auto;
+  color: buttontext;
+  letter-spacing: normal;
+  word-spacing: normal;
+  line-height: normal;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+  display: inline-block;
+  text-align: center;
+  align-items: flex-start;
+  cursor: default;
+  box-sizing: border-box;
+  background-color: buttonface;
+  margin: 0em;
+  padding-block: 1px;
+  padding-inline: 6px;
+  border-width: 1px;
+  border-style: outset;
+  border-color: buttonborder;
+  border-image: initial;
 }
 
 input {
-    text-rendering: auto;
-    color: fieldtext;
-    letter-spacing: normal;
-    word-spacing: normal;
-    line-height: normal;
-    text-transform: none;
-    text-indent: 0px;
-    text-shadow: none;
-    display: inline-block;
-    text-align: start;
-    appearance: auto;
-    -webkit-rtl-ordering: logical;
-    cursor: text;
-    background-color: field;
-    margin: 0em;
-    padding: 1px 0px;
-    border-width: 1px;
-    border-style: inset;
-    border-color: light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
-    border-image: initial;
-    padding-block: 1px;
-    padding-inline: 2px;
+  text-rendering: auto;
+  color: fieldtext;
+  letter-spacing: normal;
+  word-spacing: normal;
+  line-height: normal;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+  display: inline-block;
+  text-align: start;
+  appearance: auto;
+  -webkit-rtl-ordering: logical;
+  cursor: text;
+  background-color: field;
+  margin: 0em;
+  padding: 1px 0px;
+  border-width: 1px;
+  border-style: inset;
+  border-color: light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+  border-image: initial;
+  padding-block: 1px;
+  padding-inline: 2px;
 }
 
 @font-face {
-     font-family: 'Poppins';
-     src: url(./Poppins-Light.ttf);
+  font-family: 'Poppins';
+  src: url(./Poppins-Light.ttf);
 }
 
-body{
-     background-color: rgb(80, 45, 45);
+body {
+  background-color: rgb(80, 45, 45);
 }
 
-iframe{
-     border: 1px solid black;
+iframe {
+  border: 1px solid black;
+  margin: auto;
+  margin-top: 10px;
 }
 
-#screen{
-     background-color: white;
-     /* border-radius: 25px; */
-     height: 600px;
-     width: 380px;
-     margin: auto;
-     margin-top: 50px;
-     font-family: 'Poppins';
-     overflow-y: scroll;
-     padding: 10px;
+#screen {
+  background-color: white;
+  /* border-radius: 25px; */
+  height: 600px;
+  width: 380px;
+  margin: auto;
+  margin-top: 50px;
+  font-family: 'Poppins';
+  overflow-y: scroll;
+  padding: 10px;
 }
 
-#about{
-     text-align: center;
-     padding-top: 20px;
-     font-size: 20px;
+#about {
+  text-align: center;
+  padding-top: 20px;
+  font-size: 20px;
 }
 
-#tabBtns{
-     display: flex;
-     justify-content: space-around;
+#tabBtns {
+  display: flex;
+  justify-content: space-around;
 }
-.tabBtn{
-     width: 50%;
-     font-family: 'Poppins';
-     border: none;
-     background-color: black;
-     color: white;
-     margin-left: 10px;
+.tabBtn {
+  width: 50%;
+  font-family: 'Poppins';
+  border: none;
+  background-color: black;
+  color: white;
+  margin-left: 10px;
 }
-.tabBtn:hover{
-     background-color: white;
-     color: black;
+.tabBtn:hover {
+  background-color: white;
+  color: black;
 }
 
-#tabs{
-     height: 400px;
+#tabs {
+  height: 400px;
 }
 #makeTab,
 #voteTab,
 #resultsTab,
-#shareTab{
-     display: none;
+#shareTab {
+  display: none;
 }
-.tab{
-     text-align: center;
-     padding: 15px;
+.tab {
+  text-align: center;
+  padding: 15px;
 }
-#accessCode{
-     border: 1px solid black;
-     width: 50%;
-     margin: auto;
-     padding: 5px;
-     font-family: 'Poppins';
-     letter-spacing: 10px;
-     text-transform: uppercase;
-     text-align: center;
+#accessCode {
+  border: 1px solid black;
+  width: 50%;
+  margin: auto;
+  padding: 5px;
+  font-family: 'Poppins';
+  letter-spacing: 10px;
+  text-transform: uppercase;
+  text-align: center;
 }
 /* #findPollBtn{
      margin-top: 10px;
@@ -146,68 +148,71 @@ iframe{
 #accessTab input,
 #accessTab button,
 #reportPoll button,
-#error button{
-     width: 80%;
-     margin: auto;
-     padding: 5px;
-     font-family: 'Poppins';
-     margin-top: 10px;
+#error button,
+dialog button,
+#loadPublicPollsBtn {
+  width: 80%;
+  margin: auto;
+  padding: 5px;
+  font-family: 'Poppins';
+  margin-top: 10px;
 }
 
-footer{
-     text-align: center;
-     padding-top: 20px;
-     font-size: 10px;
+footer {
+  text-align: center;
+  padding-top: 20px;
+  font-size: 10px;
 }
 
 #option1Results,
 #option2Results,
 #option3Results,
-#option4Results{
-     /* display: none; */
-     background-color: rgb(239, 239, 239);
-     margin: 10px;
-     font-size: auto;
+#option4Results {
+  /* display: none; */
+  background-color: rgb(239, 239, 239);
+  margin: 10px;
+  font-size: auto;
 }
 
-#pollId{
-     font-family: 'Poppins';
-     text-align: center;
-     padding: 10px;
-     font-size: 30px;
+#pollId {
+  font-family: 'Poppins';
+  text-align: center;
+  padding: 10px;
+  font-size: 30px;
 }
 
-dialog{
-     display: none;
-     text-align: center;
-     padding: 10px;
-     font-size: 20px;
-     font-family: 'Poppins';
-     position: fixed;
-     top: 50%;
-     left: 50%;
-     transform: translate(-50%, -50%);
-     background-color: white;
-     border: 2px solid black;
-     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-     z-index: 1000;
-     width: 80%;
-     max-width: 500px;
-     padding: 20px;
+dialog {
+  display: none;
+  text-align: center;
+  padding: 10px;
+  font-size: 20px;
+  font-family: 'Poppins';
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border: 2px solid black;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  width: 80%;
+  max-width: 500px;
+  padding: 20px;
+  min-height: 60%;
 }
-#reportPollText{
-     text-align: left;
-     padding: 10px;
-     font-size: 20px;
-     font-family: 'Times New Roman', Times, serif;
-     width: 90%;
-     height: 400px;
-     resize: none;
-} 
+#reportPollText {
+  text-align: left;
+  padding: 10px;
+  font-size: 20px;
+  font-family: 'Times New Roman', Times, serif;
+  width: 90%;
+  height: 400px;
+  resize: none;
+}
 
-.twoColumns{
-     display: grid;
-     grid-template-columns: 50% 50%;
+.twoColumns {
+  display: grid;
+  grid-template-columns: 50% 50%;
 }
 
 .loader {
@@ -222,6 +227,65 @@ dialog{
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 50% 50%;
+  gap: 10px;
+  padding: 10px;
+}
+
+.grid > button {
+  width: 100%;
+  height: 30px;
+  font-family: 'Poppins';
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 5px;
+}
+
+#publicPollsSearch {
+  width: 100%; /* Full-width */
+  font-size: 16px; /* Increase font-size */
+  padding: 12px; /* Add some padding */
+  border: 1px solid #ddd; /* Add a grey border */
+  margin-top: 10px;
+  font-family: 'Poppins', sans-serif;
+}
+
+#publicPollsTable {
+  border-collapse: collapse; /* Collapse borders */
+  width: 100%; /* Full-width */
+  border: 1px solid #ddd; /* Add a grey border */
+  margin: auto;
+}
+
+#publicPollsTable th,
+#publicPollsTable td {
+  text-align: left; /* Left-align text */
+  padding: 12px; /* Add padding */
+}
+
+#publicPollsTable tr {
+  /* Add a bottom border to all table rows */
+  border-bottom: 1px solid #ddd;
+}
+
+#publicPollsTable tr.header,
+#publicPollsTable tr:hover {
+  /* Add a grey background color to the table header and on hover */
+  background-color: #f1f1f1;
+}
+
+#loadPublicPollsBtn{
+  width: 100%;
 }
