@@ -1,9 +1,7 @@
 // recognize query parameters
 const currentUrl = window.location.href;
-console.log("Current URL:", currentUrl);
 const url = new URL(currentUrl);
 const queryString = url.search;
-console.log("Full Query String:", queryString);
 
 // Create a URLSearchParams object to easily access individual parameters
 const params = new URLSearchParams(queryString);
@@ -12,7 +10,6 @@ const params = new URLSearchParams(queryString);
 if (params.has('id')) {
      // Get the value of the 'id' parameter
      const pollId = params.get('id').toUpperCase();
-     console.log("Poll ID:", pollId);
 
      if(pollId.length === 6){
           document.getElementById('accessCode').value = pollId;
@@ -336,7 +333,6 @@ function getPublicPolls(){
           return response.json();
      })
      .then(data => {
-          console.log(data);
           document.getElementById('loader3').style.display = 'none';
           const publicPollsList = document.getElementById('publicPollsList');
           const publicPolls = data.documents || [];
@@ -355,9 +351,9 @@ function getPublicPolls(){
                          document.getElementById('accessCode').value = poll.data.id;
                          document.getElementById('findPollBtn').click();
 
-                         moreTab.style.display = 'none';
-                         findPollTab.style.display = 'block';
-                         findMakePollTab.style.display = 'none';
+                         document.getElementById('moreTab').style.display = 'none';
+                         document.getElementById('findPollTab').style.display = 'block';
+                         document.getElementById('makePollTab').style.display = 'none';
                     });
                     publicPollsList.appendChild(listItem);
                });
@@ -372,7 +368,7 @@ function getPublicPolls(){
 // search public polls table
 function searchPublicPolls(){
      const searchInput = document.getElementById('publicPollsSearch').value.toLowerCase();
-     const publicPollsList = document.getElementById('publicPollsTable');
+     const publicPollsList = document.getElementById('publicPollsList');
      const listItems = publicPollsList.getElementsByTagName('tr');
 
      for (let i = 0; i < listItems.length; i++) {
