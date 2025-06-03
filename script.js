@@ -348,6 +348,7 @@ function getPublicPolls(){
                          <td>${poll.data.id}</td>
                     `;
                     listItem.addEventListener('click', () => {
+                         resetVoting();
                          document.getElementById('accessCode').value = poll.data.id;
                          document.getElementById('findPollBtn').click();
 
