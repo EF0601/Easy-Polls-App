@@ -308,12 +308,80 @@ function reportPoll() {
                setTimeout(() => {
                     document.getElementById('reportPollText').value = '';
                     document.getElementById('reportPoll').style.display = 'none';
-               }
-               , 2000);
+               }, 2000);
           }
      })
      .catch(err => {
           displayError(err);
      });
 
+}
+
+function getPublicPolls(){
+     document.getElementById('loader3').style.display = 'block';
+
+     fetch(`https://getpublicpolls-ldhb2q24ra-uc.a.run.app`, {
+          method: 'GET',
+          headers: {
+               'Content-Type': 'application/json'
+          }
+     })
+     .then(response => {
+          if (!response.ok) {
+               throw new Error(response.status);
+          }
+          return response.json();
+     })
+     .then(data => {
+          document.getElementById('loader3').style.display = 'none';
+          const publicPollsList = document.getElementById('publicPollsList');
+          const publicPolls = data.documents || [];
+          publicPollsList.innerHTML = ''; // Clear previous list
+
+          if (publicPolls.length === 0) {
+               publicPollsList.innerHTML = '<li>No public polls available.</li>';
+          } else {
+               publicPolls.forEach(poll => {
+                    const listItem = document.createElement('tr');
+                    listItem.innerHTML = `
+                         <td>${poll.data.title}</td>
+                         <td>${poll.data.id}</td>
+                    `;
+                    listItem.addEventListener('click', () => {
+                         document.getElementById('accessCode').value = poll.data.id;
+                         document.getElementById('findPollBtn').click();
+
+                         document.getElementById('moreTab').style.display = 'none';
+                         document.getElementById('findTab').style.display = 'block';
+                         document.getElementById('makeTab').style.display = 'none';
+                    });
+                    publicPollsList.appendChild(listItem);
+               });
+          }
+     })
+     .catch(err => {
+          document.getElementById('loader3').style.display = 'none';
+          displayError(err);
+     });
+}
+
+// search public polls table
+function searchPublicPolls(){
+     const searchInput = document.getElementById('publicPollsSearch').value.toLowerCase();
+     const publicPollsList = document.getElementById('publicPollsList');
+     const listItems = publicPollsList.getElementsByTagName('tr');
+
+     for (let i = 0; i < listItems.length; i++) {
+          const itemText = listItems[i].textContent.toLowerCase();
+          if (itemText.includes(searchInput)) {
+               listItems[i].style.display = '';
+          } else {
+               listItems[i].style.display = 'none';
+          }
+     }
+     if (searchInput === '') {
+          for (let i = 0; i < listItems.length; i++) {
+               listItems[i].style.display = '';
+          }
+     }
 }
