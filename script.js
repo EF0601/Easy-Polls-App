@@ -323,7 +323,7 @@ function reportPoll() {
 function getPublicPolls(){
      document.getElementById('loader3').style.display = 'block';
 
-     fetch(`https://getpublicpolls-ldhb2q24ra-uc.a.run.app?`, {
+     fetch(`https://getpublicpolls-ldhb2q24ra-uc.a.run.app`, {
           method: 'GET',
           headers: {
                'Content-Type': 'application/json'
@@ -346,8 +346,11 @@ function getPublicPolls(){
                publicPollsList.innerHTML = '<li>No public polls available.</li>';
           } else {
                publicPolls.forEach(poll => {
-                    const listItem = document.createElement('li');
-                    listItem.textContent = `${poll.data.title} (ID: ${poll.data.id})`;
+                    const listItem = document.createElement('tr');
+                    listItem.innerHTML = `
+                         <td>${poll.data.title}</td>
+                         <td>${poll.data.id}</td>
+                    `;
                     listItem.addEventListener('click', () => {
                          document.getElementById('accessCode').value = poll.data.id;
                          document.getElementById('findPollBtn').click();
@@ -364,4 +367,25 @@ function getPublicPolls(){
           document.getElementById('loader3').style.display = 'none';
           displayError(err);
      });
+}
+
+// search public polls table
+function searchPublicPolls(){
+     const searchInput = document.getElementById('publicPollsSearch').value.toLowerCase();
+     const publicPollsList = document.getElementById('publicPollsTable');
+     const listItems = publicPollsList.getElementsByTagName('tr');
+
+     for (let i = 0; i < listItems.length; i++) {
+          const itemText = listItems[i].textContent.toLowerCase();
+          if (itemText.includes(searchInput)) {
+               listItems[i].style.display = '';
+          } else {
+               listItems[i].style.display = 'none';
+          }
+     }
+     if (searchInput === '') {
+          for (let i = 0; i < listItems.length; i++) {
+               listItems[i].style.display = '';
+          }
+     }
 }
