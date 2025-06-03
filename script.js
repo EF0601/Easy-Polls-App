@@ -352,8 +352,8 @@ function getPublicPolls(){
                          document.getElementById('findPollBtn').click();
 
                          document.getElementById('moreTab').style.display = 'none';
-                         document.getElementById('findPollTab').style.display = 'block';
-                         document.getElementById('makePollTab').style.display = 'none';
+                         document.getElementById('findTab').style.display = 'block';
+                         document.getElementById('makeTab').style.display = 'none';
                     });
                     publicPollsList.appendChild(listItem);
                });
